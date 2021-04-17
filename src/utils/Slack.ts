@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { GitHubActivityCount } from '../../types';
+import config from './MyConfig';
 
-const notify = async (cnt: GitHubActivityCount): Promise<void> => {
+const notify = async (totalContributions: number): Promise<void> => {
+  if (!config.slackUrl) throw new Error('Not found Slack URL.');
   await axios.post(
-    'TODO: URL',
+    config.slackUrl,
     {
       channel: 'notify',
       blocks: [
@@ -11,7 +12,7 @@ const notify = async (cnt: GitHubActivityCount): Promise<void> => {
           type: 'section',
           text: {
             type: 'plain_text',
-            text: `Your contribute count for yesterday was ${cnt.yesterday}. The total of it for the last year is ${cnt.lastYear} now.`,
+            text: `The total of it for the last year is ${totalContributions} now.`,
           },
         },
       ],

@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import config from './MyConfig';
 
 interface MyResponse {
   data: {
@@ -17,7 +18,9 @@ const client = axios.create({
   timeout: 3000,
 });
 
-const fetchTotalContributionss = async (username: string) => {
+const fetchTotalContributionss = async (
+  username: string
+): Promise<AxiosResponse<MyResponse>> => {
   const data = {
     query: `query userInfo($username: String!) {
       user(login: $username) {
@@ -32,7 +35,7 @@ const fetchTotalContributionss = async (username: string) => {
   };
   return client.post<MyResponse>('/graphql', data, {
     headers: {
-      Authorization: `bearer TODO: TOKEN `,
+      Authorization: `bearer ${config.githubToken}`,
     },
   });
 };
