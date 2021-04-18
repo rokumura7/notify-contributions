@@ -11,8 +11,8 @@ const notify = async (totalContributions: number): Promise<void> => {
         {
           type: 'section',
           text: {
-            type: 'plain_text',
-            text: `The total of it for the last year is ${totalContributions} now.`,
+            type: 'mrkdwn',
+            text: `The total of it for the last year is *${totalContributions}* now.`,
           },
         },
       ],
