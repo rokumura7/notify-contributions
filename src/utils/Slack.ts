@@ -6,13 +6,13 @@ const notify = async (totalContributions: number): Promise<void> => {
   await axios.post(
     config.slackUrl,
     {
-      channel: 'notify',
+      channel: config.slackChannel,
       blocks: [
         {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `The total of it for the last year is *${totalContributions}* now.`,
+            text: `The total of your GitHub's contributions for this one year is *${totalContributions}* now.`,
           },
         },
       ],
